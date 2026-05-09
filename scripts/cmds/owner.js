@@ -3,6 +3,9 @@ const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
 
+// ===== AUTHOR LOCK =====
+const LOCKED_AUTHOR = "MR_FARHAN";
+
 module.exports = {
 config: {
 name: "owner",
@@ -18,77 +21,83 @@ category: "owner"
 },
 
 onStart: async function ({ api, event, usersData, threadsData, message }) {
+
 try {
 
-// ===== OWNER INFO =====  
-  const ownerName = "𝙼𝚁.𝙵𝙰𝚁𝙷𝙰𝙽";  
+  // ===== AUTHOR CHECK (ANTI EDIT) =====
+  if (module.exports.config.author !== LOCKED_AUTHOR) {
+    return message.reply("⛔ Author modified! This command is disabled.");
+  }
+
+  // ===== OWNER INFO =====
+  const ownerName = "𝙼𝚁.𝙵𝙰𝚁𝙷𝙰𝙽";
   const ownerReligion = "𝙸𝚂𝙻𝙰𝙼";
   const ownerRelation = "𝚂𝙸𝙽𝙶𝙻𝙴";
   const ownerAddress = "𝙹𝙴𝚂𝚂𝙾𝚁𝙴";
   const ownerAge = "𝟐𝟎";
-  
-  // ===== CONTACT =====  
-  const facebook = "fb.com/MR.MUNNA.220";  
-  const whatsapp = "wa.me/+8801934640061";  
-  const telegram = "t.me/DEVIL_FARHAN_420";  
-  const youtube = "yb.com/@munna-vai-mbs";  
 
-  // ===== BOT INFO =====  
-  const botName = global.GoatBot?.config?.nickNameBot || "─꯭𓆩»‌‌𝆠꯭፝֟𝐒𝐈𝐙𝐔𝐊𝐀𝆠꯭፝֟𓆩𝆠፝𝐁𝐀𝐁𝐘𝆠꯭፝֟𝆠꯭፝֟𓆪";  
-  const prefix = global.GoatBot?.config?.prefix || "/";  
-  const totalCommands = global.GoatBot?.commands?.size || 0;  
+  // ===== CONTACT =====
+  const facebook = "fb.com/MR.MUNNA.220";
+  const whatsapp = "wa.me/+8801934640061";
+  const telegram = "t.me/DEVIL_FARHAN_420";
+  const youtube = "yb.com/@munna-vai-mbs";
 
-  // ===== USERS & GROUPS =====  
-  const allUsers = await usersData.getAll();  
-  const allThreads = await threadsData.getAll();  
+  // ===== BOT INFO =====
+  const botName = global.GoatBot?.config?.nickNameBot || "─꯭𓆩»‌‌𝆠꯭፝֟𝐒𝐈𝐙𝐔𝐊𝐀𝆠꯭፝֟𓆩𝆠፝𝐁𝐀𝐁𝐘𝆠꯭፝֟𝆠꯭፝֟𓆪";
+  const prefix = global.GoatBot?.config?.prefix || "/";
+  const totalCommands = global.GoatBot?.commands?.size || 0;
 
-  const totalUsers = allUsers.length;  
-  const totalGroups = allThreads.length;  
+  // ===== USERS & GROUPS =====
+  const allUsers = await usersData.getAll();
+  const allThreads = await threadsData.getAll();
 
-  // ===== UPTIME =====  
-  const uptime = process.uptime();  
+  const totalUsers = allUsers.length;
+  const totalGroups = allThreads.length;
 
-  const days = Math.floor(uptime / 86400);  
-  const hours = Math.floor((uptime % 86400) / 3600);  
-  const minutes = Math.floor((uptime % 3600) / 60);  
-  const seconds = Math.floor(uptime % 60);  
+  // ===== UPTIME =====
+  const uptime = process.uptime();
 
-  const uptimeText = `${days}d ${hours}h ${minutes}m ${seconds}s`;  
+  const days = Math.floor(uptime / 86400);
+  const hours = Math.floor((uptime % 86400) / 3600);
+  const minutes = Math.floor((uptime % 3600) / 60);
+  const seconds = Math.floor(uptime % 60);
 
-  // ===== TIME =====  
-  const now = moment().tz("Asia/Dhaka");  
-  const time = now.format("hh:mm:ss A");  
-  const date = now.format("DD/MM/YYYY");  
+  const uptimeText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
 
-  // ===== CACHE =====  
-  const cacheDir = path.join(__dirname, "cache");  
+  // ===== TIME =====
+  const now = moment().tz("Asia/Dhaka");
+  const time = now.format("hh:mm:ss A");
+  const date = now.format("DD/MM/YYYY");
 
-  if (!fs.existsSync(cacheDir)) {  
-    fs.mkdirSync(cacheDir, { recursive: true });  
-  }  
+  // ===== CACHE =====
+  const cacheDir = path.join(__dirname, "cache");
 
-  const videoPath = path.join(cacheDir, "owner.mp4");  
+  if (!fs.existsSync(cacheDir)) {
+    fs.mkdirSync(cacheDir, { recursive: true });
+  }
 
-  // ===== VIDEO URL =====  
-  const videoUrl = "https://files.catbox.moe/wzosnu.mp4";  
+  const videoPath = path.join(cacheDir, "owner.mp4");
 
-  // ===== DOWNLOAD VIDEO =====  
-  const response = await axios({  
-    url: videoUrl,  
-    method: "GET",  
-    responseType: "stream"  
-  });  
+  // ===== VIDEO URL =====
+  const videoUrl = "https://files.catbox.moe/wzosnu.mp4";
 
-  const writer = fs.createWriteStream(videoPath);  
+  // ===== DOWNLOAD VIDEO =====
+  const response = await axios({
+    url: videoUrl,
+    method: "GET",
+    responseType: "stream"
+  });
 
-  response.data.pipe(writer);  
+  const writer = fs.createWriteStream(videoPath);
 
-  await new Promise((resolve, reject) => {  
-    writer.on("finish", resolve);  
-    writer.on("error", reject);  
-  });  
+  response.data.pipe(writer);
 
-  // ===== MESSAGE =====  
+  await new Promise((resolve, reject) => {
+    writer.on("finish", resolve);
+    writer.on("error", reject);
+  });
+
+  // ===== MESSAGE =====
   const msg = `
 
 ╔═══✦══════════✦═══╗
@@ -122,33 +131,34 @@ try {
 │ 📦 𝐂𝐌𝐃𝐒:「 ${totalCommands} 」
 │ 🔰 𝐏𝐑𝐄𝐅𝐈𝐗:「 ${prefix} 」
 ╰───────────────────╯
+
 ╭────── 📅 𝗧𝗜𝗠𝗘 ──────╮
 │ 🗓️ 𝐃𝐀𝐓𝐄: ${date}
 │ ⏰ 𝐓𝐈𝐌𝐄: ${time}
 │ ⏳ 𝐔𝐏𝐓𝐈𝐌𝐄: ${uptimeText}
 ╰──────────────────╯
+
 ╔═══✦══════════✦═══╗
 ║ 「 𝐓𝐇𝐀𝐍𝐊𝐒 𝐅𝐎𝐑 𝐔𝐒𝐈𝐍𝐆 」 ║
 ╚═══✦══════════✦═══╝
 `;
 
-await message.reply({  
-    body: msg,  
-    attachment: fs.createReadStream(videoPath)  
-  });  
+  await message.reply({
+    body: msg,
+    attachment: fs.createReadStream(videoPath)
+  });
 
-  // ===== DELETE VIDEO =====  
-  setTimeout(() => {  
-    if (fs.existsSync(videoPath)) {  
-      fs.unlinkSync(videoPath);  
-    }  
-  }, 10000);  
+  // ===== DELETE VIDEO =====
+  setTimeout(() => {
+    if (fs.existsSync(videoPath)) {
+      fs.unlinkSync(videoPath);
+    }
+  }, 10000);
 
-} catch (err) {  
-  console.log(err);  
-
-  return message.reply("❌ | Owner command error.");  
+} catch (err) {
+  console.log(err);
+  return message.reply("❌ | Owner command error.");
 }
 
 }
-}; 
+};
