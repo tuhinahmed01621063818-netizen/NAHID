@@ -6,25 +6,30 @@ const request = require('request');
 module.exports.config = {
   name: "jail",
   version: "8.0",
-  author: "MOHAMMAD AKASH",
+  author: "MR_FARHAN",
   countDown: 10,
   role: 0,
   shortDescription: "Wanted with thin bars",
   category: "fun",
-  guide: { en: "{p}jail @tag" }
+  guide: { en: "{p}jail @tag / reply" }
 };
 
 module.exports.onStart = async function ({ api, event, args, usersData }) {
-  const { threadID, messageID, mentions } = event;
+  const { threadID, messageID, mentions, type, messageReply } = event;
 
   let uid;
   let name = "Wanted";
 
-  if (Object.keys(mentions).length === 0) {
-    uid = event.senderID;
-  } else {
+  // ===== Mention / Reply / Self =====
+  if (Object.keys(mentions).length > 0) {
     uid = Object.keys(mentions)[0];
     name = mentions[uid];
+  }
+  else if (type === "message_reply") {
+    uid = messageReply.senderID;
+  }
+  else {
+    uid = event.senderID;
   }
 
   try {
@@ -38,12 +43,15 @@ module.exports.onStart = async function ({ api, event, args, usersData }) {
     const downloadCallback = async () => {
       if (fs.existsSync(avatarCache)) {
         const stats = fs.statSync(avatarCache);
+
         if (stats.size < 10000) {
-          const defaultUrl = "https://imgur.com/8Q2Z3tI.png";
+          const defaultUrl = "https://i.imgur.com/8Q2Z3tI.png";
+
           request(encodeURI(defaultUrl))
             .pipe(fs.createWriteStream(avatarCache))
             .on("close", generateWanted);
-        } else {
+        }
+        else {
           generateWanted();
         }
       }
@@ -52,6 +60,7 @@ module.exports.onStart = async function ({ api, event, args, usersData }) {
     const generateWanted = async () => {
       try {
         const wantedPath = await generateThinBarsImage(avatarCache, name);
+
         api.sendMessage({
           body: `@${name} WANTED! 🔒 Locked Up! (Clear view)`,
           mentions: [{ tag: name, id: uid }],
@@ -59,9 +68,13 @@ module.exports.onStart = async function ({ api, event, args, usersData }) {
         }, threadID, messageID);
 
         setTimeout(() => {
-          [avatarCache, wantedPath].forEach(file => fs.existsSync(file) && fs.unlinkSync(file));
+          [avatarCache, wantedPath].forEach(file => {
+            if (fs.existsSync(file)) fs.unlinkSync(file);
+          });
         }, 10000);
+
       } catch (genErr) {
+        console.log(genErr);
         api.sendMessage("⚠️ Poster error!", threadID, messageID);
       }
     };
@@ -71,6 +84,7 @@ module.exports.onStart = async function ({ api, event, args, usersData }) {
       .on("close", downloadCallback)
       .on("error", () => {
         const defaultUrl = "https://i.imgur.com/8Q2Z3tI.png";
+
         request(encodeURI(defaultUrl))
           .pipe(fs.createWriteStream(avatarCache))
           .on("close", generateWanted);
@@ -82,15 +96,18 @@ module.exports.onStart = async function ({ api, event, args, usersData }) {
   }
 };
 
-// === Thin Bars + Clear Pic ===
+// ===== Thin Bars + Clear Pic =====
 async function generateThinBarsImage(avatarPath, name) {
+
   const avatar = await loadImage(avatarPath);
+
   const width = 600;
   const height = 800;
+
   const canvas = createCanvas(width, height);
   const ctx = canvas.getContext('2d');
 
-  // Dark Blue BG
+  // Background
   ctx.fillStyle = '#0f172a';
   ctx.fillRect(0, 0, width, height);
 
@@ -103,37 +120,48 @@ async function generateThinBarsImage(avatarPath, name) {
   ctx.fillText('WANTED', width / 2, 120);
   ctx.shadowColor = 'transparent';
 
-  // Avatar Circle (Clear)
+  // Avatar
   const centerX = width / 2;
   const centerY = height / 2 + 20;
-  const radius = 200; // Bigger for clear view
+  const radius = 200;
 
   ctx.save();
   ctx.beginPath();
   ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
   ctx.clip();
-  ctx.drawImage(avatar, centerX - radius, centerY - radius, radius * 2, radius * 2);
+
+  ctx.drawImage(
+    avatar,
+    centerX - radius,
+    centerY - radius,
+    radius * 2,
+    radius * 2
+  );
+
   ctx.restore();
 
-  // Thin Bars (On Top, Semi-Transparent for Clear Pic)
-  ctx.globalAlpha = 0.8; // Halka for clear pic
+  // Thin Bars
+  ctx.globalAlpha = 0.8;
   ctx.strokeStyle = '#000000';
-  ctx.lineWidth = 20; // Chikon
+  ctx.lineWidth = 20;
   ctx.lineCap = 'round';
 
-  // Vertical Bars
   const barCount = 8;
   const barSpacing = width / (barCount + 1);
+
   for (let i = 1; i <= barCount; i++) {
+
     const x = i * barSpacing;
+
     ctx.beginPath();
     ctx.moveTo(x, 180);
     ctx.lineTo(x, height - 180);
     ctx.stroke();
   }
 
-  // Horizontal Bars (Thin)
+  // Horizontal Bars
   ctx.lineWidth = 18;
+
   ctx.beginPath();
   ctx.moveTo(barSpacing, 260);
   ctx.lineTo(width - barSpacing, 260);
@@ -144,9 +172,9 @@ async function generateThinBarsImage(avatarPath, name) {
   ctx.lineTo(width - barSpacing, height - 260);
   ctx.stroke();
 
-  ctx.globalAlpha = 1.0; // Reset
+  ctx.globalAlpha = 1.0;
 
-  // Locked Up!
+  // Locked Up
   ctx.font = 'italic 50px "Segoe UI"';
   ctx.fillStyle = '#ffffff';
   ctx.shadowColor = '#60a5fa';
@@ -160,7 +188,13 @@ async function generateThinBarsImage(avatarPath, name) {
   ctx.fillText(name.toUpperCase(), width / 2, height - 50);
 
   // Save
-  const wantedPath = path.join(__dirname, 'cache', `wanted_thin_${Date.now()}.png`);
+  const wantedPath = path.join(
+    __dirname,
+    'cache',
+    `wanted_thin_${Date.now()}.png`
+  );
+
   fs.writeFileSync(wantedPath, canvas.toBuffer());
+
   return wantedPath;
 }
