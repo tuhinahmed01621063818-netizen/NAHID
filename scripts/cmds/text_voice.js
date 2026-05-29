@@ -84,7 +84,7 @@ module.exports = {
       "খানকি": "https://files.catbox.moe/ecgpak.mp4",
       "khanki": "https://files.catbox.moe/ecgpak.mp4",
       "farhan": "https://files.catbox.moe/tvpfee.mp3",
-      "ফারহান": "https://files.catbox.moe/tvpfee.mp3",
+      "ফাহিম": "https://files.catbox.moe/tvpfee.mp3",
       "sizuka": "https://files.catbox.moe/3u6shs.mp3",
       "sizu": "https://files.catbox.moe/3u6shs.mp3",
       "সিজুকা": "https://files.catbox.moe/3u6shs.mp3",
