@@ -31,7 +31,7 @@ module.exports.onStart = async function({ api, event, args }) {
     const arraytag = [{ id: targetID, tag: name }];
     const a = (msg) => api.sendMessage(msg, threadID);
 
-    a("বস 𓆩𝐑𝐉 𝐅𝐀𝐑𝐇𝐀𝐍𓆪 এর চুদা লো-🖕🥵");
+    a("বস 𓆩𝗙𝗔𝗛𝗜𝗠𓆪 এর চুদা লো-🖕🥵");
 
     // Fast Banglish List (1-2 seconds interval)
 setTimeout(() => {a({body: "খাংকির মেয়ে তর মারে চুদি 🥰।" + " " + name, mentions: arraytag})}, 3000);
