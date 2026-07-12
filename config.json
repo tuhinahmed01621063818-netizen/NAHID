@@ -1,161 +1,161 @@
-‎{
-‎  "facebookAccount": {
-‎    "email": "",
-‎    "password": "",
-‎    "2FASecret": "",
-‎    "i_user": "",
-‎    "proxy": null,
-‎    "userAgent": "Mozilla/5.0 (Linux; Android 12; M2102J20SG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.0.0 Mobile Safari/537.36",
-‎    "intervalGetNewCookie": 1440,
-‎    "notes": "Automatically retrieves new cookies every x minutes. Recommended: 1440 (1 day)."
-‎  },
-‎  "antiInbox": false,
-‎  "language": "en",
-‎  "notesLanguage": "change language using ISO 639-1 code",
-‎  "nickNameBot": "—͞ 𝐐𝐔𝐄𝐄𝐍 🎀❤️‍🩹",
-‎  "prefix": "-",
-‎  "noPrefix": {
-‎    "enable": true,
-‎    "notes": "true = only bot admins can use commands without prefix | false = everyone must use prefix"
-‎  },
-‎  "adminOnly": {
-‎    "enable": false,
-‎    "ignoreCommand": []
-‎  },
-‎  "adminBot": [
-‎    "61591571863767",
-‎    "100069319995799",
-‎    "61590688843640"
-‎  ],
-‎  "reactUnsend": {
-‎    "enable": true,
-‎    "onlyAdmin": true,
-‎    "emojis": [
-‎      "😡",
-‎      "🤬"
-‎    ],
-‎    "notes": "If enable = true, bot will unsend any message reacted with these emojis. If onlyAdmin = true, only adminBot IDs can trigger it."
-‎  },
-‎  "whiteListMode": {
-‎    "enable": false,
-‎    "whiteListIds": [
-‎      "100069319995799",
-‎      "100063840894133"
-‎    ],
-‎    "notes": "If enabled, only IDs in whiteListIds can use the bot."
-‎  },
-‎  "whiteListModeThread": {
-‎    "enable": false,
-‎    "whiteListThreadIds": [],
-‎    "notes": "If enabled, only threads in whiteListThreadIds can use the bot."
-‎  },
-‎  "database": {
-‎    "type": "mongodb",
-‎    "uriMongodb": "mongodb+srv://eryxenxdb:eryxenxdbgoatv2@cluster0.523a3n0.mongodb.net/?appName=Cluster0",
-‎    "autoSyncWhenStart": false,
-‎    "autoRefreshThreadInfoFirstTime": true,
-‎    "notes": "Recommended using 'mongodb' or 'sqlite'."
-‎  },
-‎  "timeZone": "Asia/Dhaka",
-‎  "credentials": {
-‎    "gmailAccount": {
-‎      "email": "botofnexxo@gmail.com",
-‎      "clientId": "848792512039-g3mlfd39p9ttu82ga4kahk6kadjr0hcp.apps.googleusercontent.com",
-‎      "clientSecret": "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",
-‎      "refreshToken": " ",
-‎      "apiKey": ""
-‎    },
-‎    "gRecaptcha": {
-‎      "siteKey": "6LfU0TUrAAAAAJVy_tm-q9xlEIEeyBK4N8VwuGdZ",
-‎      "secretKey": "6LfU0TUrAAAAAOR_CE7oZV-8Eo83LsJmb12-lWFb"
-‎    }
-‎  },
-‎  "dashBoard": {
-‎    "enable": true,
-‎    "expireVerifyCode": 300000,
-‎    "port": 3001
-‎  },
-‎  "serverUptime": {
-‎    "enable": false,
-‎    "port": 3001,
-‎    "socket": {
-‎      "enable": true,
-‎      "channelName": "uptime",
-‎      "verifyToken": ""
-‎    }
-‎  },
-‎  "autoRestart": {
-‎    "time": null,
-‎    "notes": "Example: 60000 (1min), 3600000 (1hr), 0 0 * * * (daily)."
-‎  },
-‎  "autoUptime": {
-‎    "enable": false,
-‎    "timeInterval": 180,
-‎    "url": "",
-‎    "notes": "Time in seconds. Recommended for uptime monitors."
-‎  },
-‎  "autoLoadScripts": {
-‎    "enable": false,
-‎    "ignoreCmds": "",
-‎    "ignoreEvents": "",
-‎    "notes": "Automatically reloads scripts if edited."
-‎  },
-‎  "autoRefreshFbstate": true,
-‎  "autoReloginWhenChangeAccount": false,
-‎  "autoRestartWhenListenMqttError": true,
-‎  "restartListenMqtt": {
-‎    "enable": false,
-‎    "timeRestart": 3600000,
-‎    "delayAfterStopListening": 2000,
-‎    "logNoti": true,
-‎    "notes": "Restart listener every 1 hour."
-‎  },
-‎  "notiWhenListenMqttError": {
-‎    "notes": "Notification settings when MQTT stops listening.",
-‎    "gmail": {
-‎      "enable": false,
-‎      "emailGetNoti": ""
-‎    },
-‎    "telegram": {
-‎      "enable": false,
-‎      "botToken": "",
-‎      "chatId": ""
-‎    },
-‎    "discordHook": {
-‎      "enable": false,
-‎      "webhookUrl": ""
-‎    }
-‎  },
-‎  "hideNotiMessage": {
-‎    "commandNotFound": false,
-‎    "adminOnly": false,
-‎    "threadBanned": false,
-‎    "userBanned": false,
-‎    "needRoleToUseCmd": false,
-‎    "needRoleToUseCmdOnReply": false,
-‎    "needRoleToUseCmdOnReaction": false
-‎  },
-‎  "logEvents": {
-‎    "disableAll": false,
-‎    "message": true,
-‎    "message_reaction": true,
-‎    "message_unsend": true,
-‎    "message_reply": true,
-‎    "event": true,
-‎    "read_receipt": false,
-‎    "typ": false,
-‎    "presence": false
-‎  },
-‎  "optionsFca": {
-‎    "forceLogin": true,
-‎    "listenEvents": true,
-‎    "updatePresence": true,
-‎    "listenTyping": true,
-‎    "logLevel": "error",
-‎    "selfListen": true,
-‎    "selfListenEvent": true,
-‎    "autoMarkDelivery": false,
-‎    "autoReconnect": true,
-‎    "notes": "Docs: https://github.com/ntkhang03/fb-chat-api/blob/master/DOCS.md#apisetoptionsoptions"
-‎  }
-‎}
+{
+  "facebookAccount": {
+    "email": "",
+    "password": "",
+    "2FASecret": "",
+    "i_user": "",
+    "proxy": null,
+    "userAgent": "Mozilla/5.0 (Linux; Android 12; M2102J20SG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.0.0 Mobile Safari/537.36",
+    "intervalGetNewCookie": 1440,
+    "notes": "Automatically retrieves new cookies every x minutes. Recommended: 1440 (1 day)."
+  },
+  "antiInbox": false,
+  "language": "en",
+  "notesLanguage": "change language using ISO 639-1 code",
+  "nickNameBot": "—͞ 𝐐𝐔𝐄𝐄𝐍 🎀❤️‍🩹",
+  "prefix": "-",
+  "noPrefix": {
+    "enable": true,
+    "notes": "true = only bot admins can use commands without prefix | false = everyone must use prefix"
+  },
+  "adminOnly": {
+    "enable": false,
+    "ignoreCommand": []
+  },
+  "adminBot": [
+    "61590688843640",
+    "100069319995799",
+    "61591571863767"
+  ],
+  "reactUnsend": {
+    "enable": true,
+    "onlyAdmin": true,
+    "emojis": [
+      "😡",
+      "🤬"
+    ],
+    "notes": "If enable = true, bot will unsend any message reacted with these emojis. If onlyAdmin = true, only adminBot IDs can trigger it."
+  },
+  "whiteListMode": {
+    "enable": false,
+    "whiteListIds": [
+      "100069319995799",
+      "100063840894133"
+    ],
+    "notes": "If enabled, only IDs in whiteListIds can use the bot."
+  },
+  "whiteListModeThread": {
+    "enable": false,
+    "whiteListThreadIds": [],
+    "notes": "If enabled, only threads in whiteListThreadIds can use the bot."
+  },
+  "database": {
+    "type": "mongodb",
+    "uriMongodb": "mongodb+srv://eryxenxdb:eryxenxdbgoatv2@cluster0.523a3n0.mongodb.net/?appName=Cluster0",
+    "autoSyncWhenStart": false,
+    "autoRefreshThreadInfoFirstTime": true,
+    "notes": "Recommended using 'mongodb' or 'sqlite'."
+  },
+  "timeZone": "Asia/Dhaka",
+  "credentials": {
+    "gmailAccount": {
+      "email": "botofnexxo@gmail.com",
+      "clientId": "848792512039-g3mlfd39p9ttu82ga4kahk6kadjr0hcp.apps.googleusercontent.com",
+      "clientSecret": "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",
+      "refreshToken": " ",
+      "apiKey": ""
+    },
+    "gRecaptcha": {
+      "siteKey": "6LfU0TUrAAAAAJVy_tm-q9xlEIEeyBK4N8VwuGdZ",
+      "secretKey": "6LfU0TUrAAAAAOR_CE7oZV-8Eo83LsJmb12-lWFb"
+    }
+  },
+  "dashBoard": {
+    "enable": true,
+    "expireVerifyCode": 300000,
+    "port": 3001
+  },
+  "serverUptime": {
+    "enable": false,
+    "port": 3001,
+    "socket": {
+      "enable": true,
+      "channelName": "uptime",
+      "verifyToken": ""
+    }
+  },
+  "autoRestart": {
+    "time": null,
+    "notes": "Example: 60000 (1min), 3600000 (1hr), 0 0 * * * (daily)."
+  },
+  "autoUptime": {
+    "enable": false,
+    "timeInterval": 180,
+    "url": "",
+    "notes": "Time in seconds. Recommended for uptime monitors."
+  },
+  "autoLoadScripts": {
+    "enable": false,
+    "ignoreCmds": "",
+    "ignoreEvents": "",
+    "notes": "Automatically reloads scripts if edited."
+  },
+  "autoRefreshFbstate": true,
+  "autoReloginWhenChangeAccount": false,
+  "autoRestartWhenListenMqttError": true,
+  "restartListenMqtt": {
+    "enable": false,
+    "timeRestart": 3600000,
+    "delayAfterStopListening": 2000,
+    "logNoti": true,
+    "notes": "Restart listener every 1 hour."
+  },
+  "notiWhenListenMqttError": {
+    "notes": "Notification settings when MQTT stops listening.",
+    "gmail": {
+      "enable": false,
+      "emailGetNoti": ""
+    },
+    "telegram": {
+      "enable": false,
+      "botToken": "",
+      "chatId": ""
+    },
+    "discordHook": {
+      "enable": false,
+      "webhookUrl": ""
+    }
+  },
+  "hideNotiMessage": {
+    "commandNotFound": false,
+    "adminOnly": false,
+    "threadBanned": false,
+    "userBanned": false,
+    "needRoleToUseCmd": false,
+    "needRoleToUseCmdOnReply": false,
+    "needRoleToUseCmdOnReaction": false
+  },
+  "logEvents": {
+    "disableAll": false,
+    "message": true,
+    "message_reaction": true,
+    "message_unsend": true,
+    "message_reply": true,
+    "event": true,
+    "read_receipt": false,
+    "typ": false,
+    "presence": false
+  },
+  "optionsFca": {
+    "forceLogin": true,
+    "listenEvents": true,
+    "updatePresence": true,
+    "listenTyping": true,
+    "logLevel": "error",
+    "selfListen": true,
+    "selfListenEvent": true,
+    "autoMarkDelivery": false,
+    "autoReconnect": true,
+    "notes": "Docs: https://github.com/ntkhang03/fb-chat-api/blob/master/DOCS.md#apisetoptionsoptions"
+  }
+}
